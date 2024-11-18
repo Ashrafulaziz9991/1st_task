@@ -53,7 +53,7 @@ public:
     int search_any_value(int value)
     {
         node *a = root;
-        index = 0;
+        int index = 0;
         while (a != NULL)
         {
             if (a->x == value)
@@ -69,7 +69,7 @@ public:
     void search_all_value(int value)
     {
         node *a = root;
-        index = 0;
+        int index = 0;
         while (a != NULL)
         {
             if (a->x == value)
@@ -80,7 +80,7 @@ public:
             a = a->next;
             index++;
         }
-        cout << value << " is not found" << endl;
+        cout << value << " is not found in the list" << endl;
     }
 
     int getsum()
@@ -168,7 +168,7 @@ int main()
     // cout << "Sum of list " << D.getsum() << endl;
     cout << "last of the list " << D.getLast() << endl;
 
-    D.search_any_value(98);
+    D.search_all_value(98);
 
     return 0;
 }
