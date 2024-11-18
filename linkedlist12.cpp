@@ -50,6 +50,39 @@ public:
         return sz;
     }
 
+    int search_any_value(int value)
+    {
+        node *a = root;
+        index = 0;
+        while (a != NULL)
+        {
+            if (a->x == value)
+            {
+                return index;
+            }
+            a = a->next;
+            index++;
+        }
+        return -1;
+    }
+
+    void search_all_value(int value)
+    {
+        node *a = root;
+        index = 0;
+        while (a != NULL)
+        {
+            if (a->x == value)
+            {
+                cout << value << " is found at index " << index << endl;
+                return;
+            }
+            a = a->next;
+            index++;
+        }
+        cout << value << " is not found" << endl;
+    }
+
     int getsum()
     {
         node *a = root;
@@ -67,7 +100,7 @@ public:
         {
             return -1;
         }
-        
+
         node *a = root;
         int current_index = 0;
         while (current_index != getsize() - 1)
@@ -96,7 +129,7 @@ public:
         {
             return 0;
         }
-        
+
         node *a = root;
         while (a != NULL)
         {
@@ -128,11 +161,14 @@ int main()
     D.insertAtroot(2);
     D.insertAtroot(3);
 
+
     D.traverse();
     cout << "Size of list " << D.getsize() << endl;
     cout << "Average of list " << D.getAverage() << endl;
-    //cout << "Sum of list " << D.getsum() << endl;
+    // cout << "Sum of list " << D.getsum() << endl;
     cout << "last of the list " << D.getLast() << endl;
+
+    D.search_any_value(98);
 
     return 0;
 }
