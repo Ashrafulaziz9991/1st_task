@@ -16,6 +16,13 @@ public:
 class linkedlist
 {
 public:
+
+    linkedlist()
+    {
+        root = NULL;
+        sz = 0;
+    }
+
     node *root;
     double counter = 0;
     int sz = 0;
@@ -43,11 +50,6 @@ public:
             a = a->next;
         }
         cout << endl;
-    }
-
-    int getsize()
-    {
-        return sz;
     }
 
     int search_any_value(int value)
@@ -83,16 +85,118 @@ public:
         cout << value << " is not found in the list" << endl;
     }
 
-    int getsum()
+    void insert_any_index(int index, int data)
     {
-        node *a = root;
-        while (a != NULL)
+        if (index < 0 || index > sz)
         {
-            counter += a->x;
+            cout<<"index is not found"<<endl;
+            return;
+        }
+        
+        if (index == 0)
+        {
+            insertAtroot(data);
+            return;    
+        }
+        
+        sz++;
+        node *a = root;
+        int current_index = 0;
+
+        while (current_index != index-1)
+        {
+            a = a->next;
+            current_index++;
+        }
+
+        node *newnode = new node(data);
+        newnode->next = a->next;
+        a->next = newnode;
+    }
+
+    void insert_after_value(int value, int data)
+    {
+        sz++;
+        node *a = root;
+        int current_index = 0;
+        while (current_index != sz-1)
+        {
+            if (a->x == value)
+            {
+                break;
+            }
             a = a->next;
         }
-        return counter;
+
+        if (a == NULL)
+        {
+            cout<<"The value Doesn't exist"<<endl;
+            return;
+        }
+
+        node *b = new node(data);
+        b->next = a->next;
+        a->next = b;
     }
+
+    void delete_root()
+    {
+        if (root == NULL)
+        {
+            cout<<"Empty"<<endl;
+            return;
+        }
+        sz--;
+        node *a = root;
+        root = a->next;
+        delete a;
+    }
+
+    void delete_any_index(int index)
+    {
+        if(index < 0 || index > sz-1)
+        {
+            cout<<"index not found"<<endl;
+            return;
+        }
+
+        if(index == 0)
+        {
+            delete_root();
+            return;
+        }
+        
+        sz--;
+        node *a = root;
+        int current_index = 0;
+        while (current_index != index-1)
+        {
+            a = a->next;
+            current_index++;
+        }
+
+        node *b = a->next;
+        a->next = b->next;
+        //a->next = a->next->next;
+        delete b;
+        
+    }
+
+    int getsize()
+    {
+        return sz;
+    }
+
+    // double getsum()
+    // {
+    //     node *a = root;
+    //     while (a != NULL)
+    //     {
+    //         counter += a->x;
+    //         a = a->next;
+    //     }
+    //     return counter;
+    // }
 
     int getLast()
     {
@@ -112,31 +216,31 @@ public:
         return a->x;
     }
 
-    // int getsum()
-    // {
-    //     node *a = root;
-    //     while (a != NULL)
-    //     {
-    //         counter += a->x;
-    //         a = a->next;
-    //     }
-    //     return counter;
-    // }
-
-    double getAverage()
+    double getsum()
     {
-        if (root == NULL)
-        {
-            return 0;
-        }
-
         node *a = root;
         while (a != NULL)
         {
             counter += a->x;
             a = a->next;
         }
-        return counter / sz;
+        return counter;
+    }
+
+    double getAverage()
+    {
+        // if (root == NULL)
+        // {
+        //     return 0;
+        // }
+        // node *a = root;
+        // while (a != NULL)
+        // {
+        //     counter += a->x;
+        //     a = a->next;
+        // }
+        //double avg =(double) counter/sz;
+        return getsum()/sz;
     }
 };
 
@@ -146,7 +250,7 @@ int main()
     // cin.tie(0);
 
     linkedlist D;
-    // int x = 7;
+    //double sum = 0;
     //  int x;
     //  cout<<"Enter your Number : ";
     //  cin>>x;
@@ -155,20 +259,31 @@ int main()
     // D.insertAtroot(70);
     // D.insertAtroot(77);
     // D.insertAtroot(74);
-    D.insertAtroot(7);
-    D.insertAtroot(4);
+    // D.insertAtroot(7);
+    // D.insertAtroot(4);
     D.insertAtroot(6);
     D.insertAtroot(2);
     D.insertAtroot(3);
 
+    D.traverse();
+    //cout<<D.getAverage()<<endl;
+    cout<<D.getLast()<<endl;
+    cout<<D.getsize()<<endl;
+
+    D.insertAtroot(87);
+    D.insertAtroot(70);
+    D.insertAtroot(77);
+    D.insertAtroot(74);
+    D.insertAtroot(7);
+    D.insertAtroot(4);
 
     D.traverse();
-    cout << "Size of list " << D.getsize() << endl;
-    cout << "Average of list " << D.getAverage() << endl;
-    // cout << "Sum of list " << D.getsum() << endl;
-    cout << "last of the list " << D.getLast() << endl;
+    //sum = D.getsum();
+    //cout<<"Sum is "<<D.getsum()<<endl;
+    cout<<D.getAverage()<<endl;
+    cout<<D.getLast()<<endl;
+    cout<<D.getsize()<<endl;
 
-    D.search_all_value(98);
 
     return 0;
 }
