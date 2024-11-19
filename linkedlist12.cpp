@@ -24,7 +24,6 @@ public:
     }
 
     node *root;
-    double counter = 0;
     int sz = 0;
 
     void insertAtroot(int value)
@@ -50,6 +49,25 @@ public:
             a = a->next;
         }
         cout << endl;
+    }
+
+    void Reverse(node *a)
+    {
+        if (a == NULL)
+        {
+            //cout<<"value does not exist"<<endl;
+            return;
+        }
+        
+        Reverse(a->next);
+        cout<<a->x<<" ";
+    }
+
+    void printReverse()
+    {
+        cout<<"Reverse way is : ";
+        Reverse(root);
+        cout<<endl;
     }
 
     int search_any_value(int value)
@@ -187,17 +205,6 @@ public:
         return sz;
     }
 
-    // double getsum()
-    // {
-    //     node *a = root;
-    //     while (a != NULL)
-    //     {
-    //         counter += a->x;
-    //         a = a->next;
-    //     }
-    //     return counter;
-    // }
-
     int getLast()
     {
         if (root == NULL)
@@ -218,6 +225,7 @@ public:
 
     double getsum()
     {
+        double counter = 0;
         node *a = root;
         while (a != NULL)
         {
@@ -229,19 +237,9 @@ public:
 
     double getAverage()
     {
-        // if (root == NULL)
-        // {
-        //     return 0;
-        // }
-        // node *a = root;
-        // while (a != NULL)
-        // {
-        //     counter += a->x;
-        //     a = a->next;
-        // }
-        //double avg =(double) counter/sz;
         return getsum()/sz;
     }
+
 };
 
 int main()
@@ -250,25 +248,15 @@ int main()
     // cin.tie(0);
 
     linkedlist D;
-    //double sum = 0;
-    //  int x;
-    //  cout<<"Enter your Number : ";
-    //  cin>>x;
-
-    // D.insertAtroot(87);
-    // D.insertAtroot(70);
-    // D.insertAtroot(77);
-    // D.insertAtroot(74);
-    // D.insertAtroot(7);
-    // D.insertAtroot(4);
+    
     D.insertAtroot(6);
     D.insertAtroot(2);
     D.insertAtroot(3);
 
     D.traverse();
-    //cout<<D.getAverage()<<endl;
-    cout<<D.getLast()<<endl;
+    cout<<D.getsum()<<endl;
     cout<<D.getsize()<<endl;
+    cout<<D.getAverage()<<endl;
 
     D.insertAtroot(87);
     D.insertAtroot(70);
@@ -278,12 +266,17 @@ int main()
     D.insertAtroot(4);
 
     D.traverse();
-    //sum = D.getsum();
-    //cout<<"Sum is "<<D.getsum()<<endl;
+    cout<<D.getsum()<<endl;
     cout<<D.getAverage()<<endl;
     cout<<D.getLast()<<endl;
     cout<<D.getsize()<<endl;
 
-
+    D.insert_after_value(7, 10);
+    D.traverse();
+    cout<<D.getsum()<<endl;
+    cout<<D.getAverage()<<endl;
+    cout<<D.getLast()<<endl;
+    cout<<D.getsize()<<endl;
+    D.printReverse();
     return 0;
 }
